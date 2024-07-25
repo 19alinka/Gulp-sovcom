@@ -1,0 +1,262 @@
+@import '../variables';
+@import '../media';
+
+@mixin drop($top, $right, $tran, $tranY) {
+  &::before {
+    content: "";
+    position: absolute;
+    background-image: url("../../img/drop.svg");
+    top: $top;
+    right: $right;
+    width: 9px;
+    height: 6px;
+    transform: $tran;
+    transition: transform 0.4s ease-in-out; 
+  }
+  &:hover::before {
+    transform: $tranY;
+  }
+}
+
+.header {
+  position: relative;
+  background-color: $background;
+  padding: 18px 0;
+  z-index: 5;
+  @include tablet {
+    padding: 17px 0;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  &__contact {
+    position: relative;
+    white-space: nowrap;
+    &::after {
+      content: "";
+      position: absolute;
+      background-image: url("../../img/telefon.svg");
+      width: 24px;
+      height: 24px;
+      left: -34px;
+      @include mobile {
+        left: 22vw;
+      }
+    }
+    @include mobile {
+      font-size: 0;
+    }
+  }
+
+  &__burger-icon {
+    display: none;
+    @include tablet {
+      display: block;
+      position: relative;
+    }
+  }
+
+  &__button {
+    width: 22px;
+    height: 14px;
+    background-color: $background;
+    &::after {
+      content: "";
+      background-image: url("../../img/header-burger.svg");
+      position: absolute;
+      width: 22px;
+      height: 14px;
+      top: 4px;
+      right: 0;
+    }
+  }
+
+  &__burger-menu {
+    @include tablet {
+      position: absolute;
+      top: 63px;
+      right: -396px;
+    }
+  }
+
+  &__burger-active {
+    transition: right 0.4s ease-in-out;
+    right: -22px;
+    @include mobile {
+      right: -10px;
+    }
+  }
+}
+
+.nav {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    @include laptop {
+      gap: 15px;
+    }
+    @include tablet {
+      flex-direction: column;
+      gap: 0;
+      width: 375px;
+      height: 100vh;
+      background-color: $background;
+    }
+  }
+
+  &__link {
+    padding: 8px 18px;
+    transition: color 0.4s ease-in-out;
+    &:hover {
+      color: $link;
+      @include tablet {
+        color: $white;
+        background-color: $background;
+      }
+    }
+    @include laptop {
+      padding: 8px 8px;
+    }
+    @include tablet {
+      display: block;
+      background-color: $gray;
+      padding: 8px 0 8px 18px;
+    }
+  }
+
+  &-drop {
+    position: relative;
+    @include drop(10px, -10px, rotate(180deg), rotateY(0));
+    &:hover {
+      .sub__list {
+        display: block;
+        @include tablet {
+          position: static;
+          padding-top: 0;
+          width: inherit;
+        }
+      }
+    }
+    @include tablet {
+      @include drop(17px, 200px, rotate(180deg), rotateY(0));
+    }
+  }
+}
+
+.sub {
+  &__list {
+    display: none;
+    position: absolute;
+    width: 320px;
+    padding-top: 29px;
+    font-size: calc($font-size - 2px);
+    line-height: 1.5;
+    &::after {
+      content: "";
+      background-image: url("../../img/sub-drop-arrow.svg");
+      position: absolute;
+      top: 15px;
+      left: 47px;
+      width: 28px;
+      height: 14px;
+      transform: rotate(360deg);
+      @include tablet {
+        display: none;
+      }
+    }
+  }
+
+  &__item {
+    background-color: $gray;
+  }
+
+  &__link {
+    display: block;
+    padding: 8px 36px 8px 18px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transition: background-color 0s ease-in-out;
+    &:hover {
+      background-color: $background;
+      border-radius: inherit;
+    }
+  }
+
+  &-drop {
+    position: relative;
+    border-radius: 0 0 8px 8px;
+    @include drop(18px, 18px, rotate(90deg), rotate(-90deg));
+    &:hover {
+      .third__list {
+        display: block;
+        @include tablet {
+          position: static;
+          padding-left: 0;
+          width: inherit;
+        }
+      }
+    }
+    @include tablet {
+      @include drop(18px, 18px, rotate(180deg), rotateY(0));
+      border-radius: 0;
+    }
+  }
+}
+
+.third {
+  &__list {
+    display: none;
+    position: absolute;
+    width: 216px;
+    padding-left: 22px;
+    left: 320px;
+    bottom: 0;
+  }
+
+  &__item {
+    position: relative;
+    background-color: $gray;
+    &:first-child {
+      border-radius: 8px 8px 0 0;
+      @include tablet {
+        border-radius: 0;
+      }
+    }
+    &:last-child {
+      border-radius: 0 0 8px 8px;
+      &::before {
+        content: "";
+        background-image: url("../../img/third-drop-arrow.svg");
+        position: absolute;
+        top: 6px;
+        left: -14px;
+        width: 14px;
+        height: 28px;
+        @include tablet {
+          display: none;
+        }
+      }
+      @include tablet {
+        border-radius: 0;
+      }
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 8px 12px 8px 18px;
+    transition: background-color 0 ease-in-out;
+    border-radius: inherit;
+    white-space: nowrap;
+    &:hover {
+      background-color: $background;
+    }
+  }
+}

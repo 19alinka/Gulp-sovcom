@@ -1,0 +1,25 @@
+@import '../variables';
+@import '../media';
+
+.main {
+  @include tablet {
+    &__show-overlay::before {
+        content: "";
+        right: 0;
+        top: 70px;
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background-color: $overlay;
+    }
+  }
+
+  &__hero {
+    background-image: url('../../img/alpaca.svg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+  }
+}
